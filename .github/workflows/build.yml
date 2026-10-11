@@ -1,1 +1,17 @@
-[![Build Android APK](https://github.com/Hyder21/Android-media-firewall-/actions/workflows/build.yml/badge.svg)](https://github.com/Hyder21/Android-media-firewall-/actions/workflows/build.yml)
+name: Build Android APK
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Run build.py
+        run: python3 .github/scripts/build.py
+      - name: Upload
+        uses: actions/upload-artifact@v4
+        with:
+          name: MediaFirewall-App
+          path: .
